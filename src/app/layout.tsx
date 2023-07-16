@@ -1,4 +1,4 @@
-import { ReduxWrapper } from "@/component/ReduxWrapper";
+import { ReduxWrapper } from "@/app/component/ReduxWrapper";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
