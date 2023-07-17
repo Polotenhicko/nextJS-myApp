@@ -1,7 +1,7 @@
 "use client";
 import { decrement, increment } from "@/store/actions/counterActions";
 import styles from "./page.module.css";
-import { useDispatch, useSelector } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
   const counter: number = useSelector(({ counter }) => counter);
