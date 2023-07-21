@@ -4,8 +4,8 @@ import { Message } from './Message';
 export function MessageList({ messageList }: { messageList: TMessage[] }) {
   return (
     <div>
-      {messageList.map((message) => (
-        <Message message={message} />
+      {messageList.map((message, i) => (
+        <Message message={message} key={i} />
       ))}
     </div>
   );
