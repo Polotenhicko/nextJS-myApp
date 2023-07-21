@@ -1,25 +1,31 @@
-"use client";
-import { decrement, increment } from "@/store/actions/counterActions";
-import styles from "./page.module.css";
-import { useDispatch, useSelector } from "react-redux";
+'use client';
+import styles from './page.module.css';
+import { ControlPanel } from './component/ControlPanel';
+import { MessageList } from './component/MessageList';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { TMessageState } from '../store/reducers/messageReducer';
+import { connect } from '@/store/actions/messageActions';
+
+async function getSocketURL() {
+  const res = await fetch('/api');
+  return await res.json();
+}
 
 export default function Home() {
-  const counter: number = useSelector(({ counter }) => counter);
+  const message = useSelector(({ message }: { message: TMessageState }) => message);
   const dispatch = useDispatch();
 
-  const handleIncrement = () => {
-    dispatch(increment());
-  };
-
-  const handleDecrement = () => {
-    dispatch(decrement());
-  };
+  useEffect(() => {
+    getSocketURL().then((socketURL: string) => {
+      dispatch(connect(socketURL));
+    });
+  }, []);
 
   return (
     <main className={styles.main}>
-      <div>{counter}</div>
-      <button onClick={handleIncrement}>Increment</button>
-      <button onClick={handleDecrement}>Decrement</button>
+      <MessageList messageList={[]} />
+      <ControlPanel />
     </main>
   );
 }
