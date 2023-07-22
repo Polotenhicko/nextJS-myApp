@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { counterReducer } from './counterReducer';
 import { messageReducer } from './messageReducer';
+import { socketReducer } from './socketReducer';
 
 export const rootReducer = combineReducers({
-  counter: counterReducer,
-  message: messageReducer,
+  messages: messageReducer,
+  socket: socketReducer,
 });

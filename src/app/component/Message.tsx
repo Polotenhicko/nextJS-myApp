@@ -1,10 +1,11 @@
-import { TMessage } from '../../store/actions/messageActions';
+import { TMessage } from '@/store/models/message';
+import styles from '../page.module.css';
 
 export function Message({ message }: { message: TMessage }) {
   return (
-    <div>
-      <div>{message.login}</div>
-      <div>{message.text}</div>
+    <div className={styles.message}>
+      <div className={styles.messageLogin}>{message.login}</div>
+      <div className={styles.messageText}>{message.text}</div>
     </div>
   );
 }

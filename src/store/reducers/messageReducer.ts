@@ -1,28 +1,13 @@
-import { TMessage } from '../actions/messageActions';
-import { TMessageAction } from '../actions/messageActions';
-import { Socket } from '@/utils/Socket';
+import { TMessage } from '../models/message';
+import { TMessageActions } from '../actions/messageActions';
+import { socket } from '@/utils/Socket';
 
-export type TMessageState = {
-  messageList: TMessage[];
-  _socket: Socket;
-};
+const initialState: TMessage[] = [];
 
-const initialState: TMessageState = {
-  messageList: [],
-  _socket: new Socket(),
-};
-
-export const messageReducer = (state = initialState, action: TMessageAction) => {
+export const messageReducer = (state = initialState, action: TMessageActions) => {
   switch (action.type) {
-    case 'CONNECT':
-      state._socket.connect(action.payload);
-      return { ...state };
-    case 'ON_EVENT':
-      state._socket.on(action.payload.eventName, action.payload.callback);
-      return { ...state };
     case 'RECEIVED_MESSAGE':
-      state.messageList.push(action.payload);
-      return { ...state };
+      return [...state, action.payload];
     default:
       return state;
   }

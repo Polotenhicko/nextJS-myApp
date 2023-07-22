@@ -4,8 +4,8 @@ import { ControlPanel } from './component/ControlPanel';
 import { MessageList } from './component/MessageList';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TMessageState } from '../store/reducers/messageReducer';
-import { connect } from '@/store/actions/messageActions';
+import { TMessage } from '@/store/models/message';
+import { connect, disconnect } from '@/store/actions/socketAction';
 
 async function getSocketURL() {
   const res = await fetch('/api');
@@ -13,18 +13,21 @@ async function getSocketURL() {
 }
 
 export default function Home() {
-  const message = useSelector(({ message }: { message: TMessageState }) => message);
+  const messages = useSelector(({ messages }: { messages: TMessage[] }) => messages);
   const dispatch = useDispatch();
 
   useEffect(() => {
     getSocketURL().then((socketURL: string) => {
       dispatch(connect(socketURL));
     });
+    return () => {
+      dispatch(disconnect());
+    };
   }, []);
 
   return (
     <main className={styles.main}>
-      <MessageList messageList={[]} />
+      <MessageList messageList={messages} />
       <ControlPanel />
     </main>
   );

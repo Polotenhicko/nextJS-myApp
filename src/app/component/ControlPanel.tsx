@@ -1,27 +1,43 @@
+import { sendMessage } from '@/store/actions/socketAction';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import styles from '../page.module.css';
 
 export function ControlPanel() {
-  const [nickname, setNickname] = useState('');
+  const [login, setNickname] = useState('');
   const [text, setText] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const message = {
+      login,
+      text,
+    };
+    dispatch(sendMessage(message));
   };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.controlPanel}>
       <input
+        className={styles.inputLogin}
         type="text"
-        placeholder="Никнейм"
-        value={nickname}
+        placeholder="Логин"
+        value={login}
+        maxLength={20}
+        required
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNickname(e.target.value)}
       />
-      <input
-        type="text"
+      <textarea
+        className={styles.inputText}
         placeholder="Текст"
         value={text}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+        maxLength={500}
+        rows={10}
+        required
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setText(e.target.value)}
       />
-      <button>Отправить</button>
+      <button className={styles.controlButton}>Отправить</button>
     </form>
   );
 }

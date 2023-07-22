@@ -1,8 +1,4 @@
-type TSocketMessageEvent = {
-  data: string;
-};
-
-export class Socket {
+class Socket {
   socket: WebSocket | null;
 
   constructor() {
@@ -23,17 +19,23 @@ export class Socket {
   }
 
   send(message: {}) {
-    if (this.socket) {
-      this.socket.send(JSON.stringify(message));
+    try {
+      if (this.socket) {
+        this.socket.send(JSON.stringify(message));
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 
-  on<T extends keyof WebSocketEventMap>(
-    eventName: T,
-    callback: (e: WebSocketEventMap[T]) => any
+  on(
+    eventName: keyof WebSocketEventMap,
+    callback: (e: WebSocketEventMap[keyof WebSocketEventMap]) => any
   ) {
     if (this.socket) {
       this.socket.addEventListener(eventName, callback);
     }
   }
 }
+
+export const socket = new Socket();
