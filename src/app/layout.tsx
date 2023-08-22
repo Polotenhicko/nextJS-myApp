@@ -1,9 +1,7 @@
-'use client';
 import './globals.css';
 import { ReduxWrapper } from '@/component/ReduxWrapper';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -19,23 +17,8 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   console.log(usePathname());
+  console.log('render root layout');
 
-  // const router = useRouter();
-  // router.push('/dev');
-
-  useEffect(() => {
-    console.log('mount root layout');
-    return () => {
-      console.log('unmount root layout');
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log('update root layout');
-    return () => {
-      console.log('reupdate root layout');
-    };
-  });
   return (
     <html lang="ru">
       <body className={inter.className}>
