@@ -7,14 +7,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TMessage } from '@/store/models/message';
 import { connect, disconnect } from '@/store/actions/socketAction';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 async function getSocketURL() {
   const res = await fetch('/api');
   return await res.json();
 }
 
-export default function Home() {
+async function getTrain(): Promise<string> {
+  await new Promise<void>((res) => {
+    setTimeout(() => res(), 3e3);
+  });
+
+  return 'zopa';
+}
+
+export default async function Home() {
   const messages = useSelector(({ messages }: { messages: TMessage[] }) => messages);
   const dispatch = useDispatch();
 
@@ -26,6 +33,8 @@ export default function Home() {
       dispatch(disconnect());
     };
   }, []);
+
+  const data = await getTrain();
 
   return (
     <main className={styles.main}>
@@ -42,6 +51,7 @@ export default function Home() {
           </div>
         ))}
       </div>
+      {data}
     </main>
   );
 }
