@@ -13,14 +13,6 @@ async function getSocketURL() {
   return await res.json();
 }
 
-async function getTrain(): Promise<string> {
-  await new Promise<void>((res) => {
-    setTimeout(() => res(), 3e3);
-  });
-
-  return 'zopa';
-}
-
 export default async function Home() {
   const messages = useSelector(({ messages }: { messages: TMessage[] }) => messages);
   const dispatch = useDispatch();
@@ -33,8 +25,6 @@ export default async function Home() {
       dispatch(disconnect());
     };
   }, []);
-
-  const data = await getTrain();
 
   return (
     <main className={styles.main}>
@@ -51,7 +41,6 @@ export default async function Home() {
           </div>
         ))}
       </div>
-      {data}
     </main>
   );
 }
