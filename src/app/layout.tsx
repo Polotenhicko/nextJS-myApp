@@ -2,7 +2,7 @@ import './globals.css';
 import { ReduxWrapper } from '@/app/components/ReduxWrapper';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,9 +16,6 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  console.log(usePathname());
-  console.log('render root layout');
-
   return (
     <html lang="ru">
       <body className={inter.className}>
