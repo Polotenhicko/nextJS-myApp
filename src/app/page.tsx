@@ -1,7 +1,7 @@
 'use client';
 import styles from './page.module.css';
-import { ControlPanel } from './component/ControlPanel';
-import { MessageList } from './component/MessageList';
+import { ControlPanel } from './components/ControlPanel';
+import { MessageList } from './components/MessageList';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TMessage } from '@/store/models/message';
@@ -13,7 +13,7 @@ async function getSocketURL() {
   return await res.json();
 }
 
-export default async function Home() {
+export default function Home() {
   const messages = useSelector(({ messages }: { messages: TMessage[] }) => messages);
   const dispatch = useDispatch();
 

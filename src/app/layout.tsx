@@ -1,5 +1,5 @@
 import './globals.css';
-import { ReduxWrapper } from '@/component/ReduxWrapper';
+import { ReduxWrapper } from '@/app/components/ReduxWrapper';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { usePathname, useRouter } from 'next/navigation';

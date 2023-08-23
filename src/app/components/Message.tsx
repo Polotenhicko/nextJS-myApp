@@ -1,5 +1,5 @@
 import { TMessage } from '@/store/models/message';
-import styles from '../page.module.css';
+import styles from './../page.module.css';
 
 export function Message({ message }: { message: TMessage }) {
   return (
