@@ -1,0 +1,23 @@
+'use client';
+
+// в отличии от error.tsx, может охватить ошибку и в app/layout и app/template
+// при этом всё равно нужен error.tsx
+
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
+  console.log(error);
+
+  return (
+    <html>
+      <body>
+        <h2>Something went wrong!</h2>
+        <button onClick={() => reset()}>Try again</button>
+      </body>
+    </html>
+  );
+}
