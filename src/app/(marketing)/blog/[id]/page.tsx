@@ -18,6 +18,7 @@ export async function generateStaticParams() {
 
   return posts.map((post) => ({
     id: post.id,
+    body: post.body,
   }));
 }
 
