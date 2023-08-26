@@ -1,4 +1,4 @@
-// 'use client';
+'use client';
 import Link from 'next/link';
 const buffer = require('buffer').Buffer;
 
@@ -30,6 +30,7 @@ async function getTrain(): Promise<string> {
 
 export default async function Page({ params }: { params: { postId: number } }) {
   const data = await getTrain();
+  console.log(params);
 
   return (
     <div>

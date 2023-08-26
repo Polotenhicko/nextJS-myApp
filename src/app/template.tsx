@@ -26,5 +26,12 @@ export default function MainTemplate({ children }: { children: React.ReactNode }
     }
   }, [isError]);
 
+  useEffect(() => {
+    console.log('update main template');
+    return () => {
+      console.log('reupdate main template');
+    };
+  });
+
   return <div className="mainTemplate">{children}</div>;
 }
